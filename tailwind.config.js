@@ -5,7 +5,7 @@ export default {
   ],
   theme: {
     extend: {},
-    fontFamily: { sans: ['Rubik', 'sans-serif'], },
+    fontFamily: { sans: ['Poppins', 'sans-serif'] },
   },
   plugins: [],
 };
