@@ -513,20 +513,19 @@
 // }
 
 
-
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { CheckCircle } from "lucide-react";
 
 export default function JobApplicationForm() {
   const [formData, setFormData] = useState({
     firstName: "",
-    lastName: "",
     email: "",
     phone: "",
     position: "",
     resumeLink: "",
   });
 
+  const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
@@ -539,47 +538,112 @@ export default function JobApplicationForm() {
     "System Admin",
   ];
 
+  /* ================= AUTO HIDE SUCCESS (3 SEC) ================= */
+  useEffect(() => {
+    if (submitSuccess) {
+      const timer = setTimeout(() => {
+        setSubmitSuccess(false);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [submitSuccess]);
+
+  /* ================= VALIDATION ================= */
+  const validate = () => {
+    const newErrors = {};
+
+    if (!formData.firstName.trim())
+      newErrors.firstName = "Name is required";
+
+    if (!formData.email.trim())
+      newErrors.email = "Email is required";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email))
+      newErrors.email = "Invalid email address";
+
+    if (!formData.phone.trim())
+      newErrors.phone = "Phone number is required";
+    else if (!/^[0-9]{10}$/.test(formData.phone))
+      newErrors.phone = "Enter valid 10-digit number";
+
+    if (!formData.position)
+      newErrors.position = "Please select a position";
+
+    if (!formData.resumeLink.trim())
+      newErrors.resumeLink = "Resume / Portfolio link is required";
+
+    return newErrors;
+  };
+
+  /* ================= HANDLERS ================= */
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData((p) => ({ ...p, [name]: value }));
+    if (errors[name]) {
+      setErrors((p) => ({ ...p, [name]: "" }));
+    }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const validationErrors = validate();
+    setErrors(validationErrors);
+    if (Object.keys(validationErrors).length > 0) return;
+
     setIsSubmitting(true);
 
-    setTimeout(() => {
-      setIsSubmitting(false);
+    const data = {
+      name: formData.firstName,
+      email: formData.email,
+      phone: formData.phone,
+      toMail: "suneelgokada1227@gmail.com",
+      toName: "Itrika HR",
+      subject: `Job Application - ${formData.position}`,
+      message: `
+Name: ${formData.firstName}
+Email: ${formData.email}
+Phone: ${formData.phone}
+Position: ${formData.position}
+
+Resume / Portfolio:
+${formData.resumeLink}
+      `,
+    };
+
+    try {
+      const response = await fetch(
+        "https://api.qrdcard.com/api/url/sendmail",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        }
+      );
+
+      if (!response.ok) throw new Error("Mail failed");
+
       setSubmitSuccess(true);
-    }, 1500);
+      setFormData({
+        firstName: "",
+        email: "",
+        phone: "",
+        position: "",
+        resumeLink: "",
+      });
+    } catch (err) {
+      alert("Failed to submit application. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
-  /* ================= SUCCESS STATE ================= */
-
-  if (submitSuccess) {
-    return (
-      <div className="min-h-[420px] flex items-center justify-center bg-slate-50 px-4 font-[Poppins]">
-        <div className="bg-white rounded-3xl shadow-xl p-10 max-w-sm w-full text-center border-t-8 border-[#f97316]">
-          <CheckCircle className="w-14 h-14 text-[#f97316] mx-auto mb-4" />
-          <h2 className="text-xl font-semibold tracking-tight text-slate-900">
-            Application Submitted
-          </h2>
-          <p className="text-slate-500 mt-2 text-sm">
-            Our team will reach out shortly.
-          </p>
-        </div>
-      </div>
-    );
-  }
-
-  /* ================= MAIN FORM ================= */
-
+  /* ================= MAIN UI (UNCHANGED) ================= */
   return (
     <div className="bg-slate-50 flex items-start md:items-center justify-center font-[Poppins] px-4 sm:px-6 md:px-10 py-10">
       <div className="max-w-6xl w-full grid lg:grid-cols-2 bg-white rounded-[1.5rem] shadow-2xl overflow-hidden min-h-[520px] sm:min-h-[580px] lg:min-h-[680px]">
 
-        {/* ================= LEFT BRAND PANEL ================= */}
-        <div className="relative flex flex-col justify-center text-white p-8 sm:p-10 lg:p-16">
+        {/* LEFT PANEL – SAME */}
+         <div className="relative flex flex-col justify-center text-white p-8 sm:p-10 lg:p-16">
           <div className="absolute inset-0 bg-gradient-to-br from-[#0c1b33] via-[#11254a] to-[#0c1b33]" />
 
           <div className="relative z-10 space-y-8">
@@ -613,38 +677,42 @@ export default function JobApplicationForm() {
           </div>
         </div>
 
-        {/* ================= RIGHT FORM PANEL ================= */}
+        {/* RIGHT FORM PANEL */}
         <div className="p-8 sm:p-10 lg:p-16 flex items-center bg-white">
-          <form
-            onSubmit={handleSubmit}
-            className="space-y-6 sm:space-y-8 w-full"
-          >
-            {/* Name */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6">
-              <Input
-                label="Name"
-                name="firstName"
-                value={formData.firstName}
-                onChange={handleChange}
-              />
-            </div>
+          <form onSubmit={handleSubmit} className="space-y-6 w-full">
 
-            {/* Email */}
+            {/* ✅ INLINE SUCCESS MESSAGE */}
+            {submitSuccess && (
+              <div className="flex items-center gap-2 rounded-lg border border-green-200 bg-green-50 px-4 py-2 text-green-700 text-sm font-medium">
+                <CheckCircle className="w-4 h-4 text-green-600" />
+                Application submitted successfully.
+              </div>
+            )}
+
+            <Input
+              label="Name"
+              name="firstName"
+              value={formData.firstName}
+              onChange={handleChange}
+              error={errors.firstName}
+            />
+
             <Input
               label="Email"
               name="email"
+              type="email"
               value={formData.email}
               onChange={handleChange}
-              type="email"
+              error={errors.email}
             />
 
-            {/* Phone + Position */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <Input
                 label="Phone"
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
+                error={errors.phone}
               />
 
               <div>
@@ -653,30 +721,38 @@ export default function JobApplicationForm() {
                   name="position"
                   value={formData.position}
                   onChange={handleChange}
-                  className="w-full py-2 border-b border-slate-200 bg-transparent text-sm outline-none focus:border-slate-900"
+                  className={`w-full py-2 border-b bg-transparent text-sm outline-none transition-colors
+                    ${
+                      errors.position
+                        ? "border-red-500 hover:border-red-500 focus:border-red-500"
+                        : "border-slate-200 hover:border-blue-600 focus:border-blue-600"
+                    }`}
                 >
                   <option value="">Select</option>
                   {positions.map((p) => (
                     <option key={p}>{p}</option>
                   ))}
                 </select>
+                {errors.position && (
+                  <p className="text-xs text-red-500 mt-1">
+                    {errors.position}
+                  </p>
+                )}
               </div>
             </div>
 
-            {/* Resume */}
             <Input
               label="Portfolio / Resume Link"
               name="resumeLink"
               value={formData.resumeLink}
               onChange={handleChange}
-              placeholder="https://..."
+              error={errors.resumeLink}
             />
 
-            {/* Submit */}
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full py-3 sm:py-4 mt-2 sm:mt-4 bg-[#2563eb] hover:bg-[#f97316] text-white font-semibold text-[11px] uppercase tracking-[0.2em] transition-all duration-300 rounded shadow-md"
+              className="w-full py-3 bg-[#2563eb] hover:bg-[#f97316] text-white font-semibold text-[11px] uppercase tracking-[0.2em] transition-all rounded disabled:opacity-50"
             >
               {isSubmitting ? "Processing..." : "Submit Application"}
             </button>
@@ -687,8 +763,7 @@ export default function JobApplicationForm() {
   );
 }
 
-/* ================= REUSABLE PARTS ================= */
-
+/* ================= REUSABLE ================= */
 function Label({ children }) {
   return (
     <label className="block text-[10px] uppercase tracking-widest font-semibold text-slate-700 mb-1">
@@ -697,14 +772,20 @@ function Label({ children }) {
   );
 }
 
-function Input({ label, ...props }) {
+function Input({ label, error, ...props }) {
   return (
     <div>
       <Label>{label}</Label>
       <input
         {...props}
-        className="w-full py-2 border-b border-slate-200 bg-transparent text-sm outline-none focus:border-slate-900 transition-colors"
+        className={`w-full py-2 border-b bg-transparent text-sm outline-none transition-colors duration-200
+          ${
+            error
+              ? "border-red-500 focus:border-red-500 hover:border-red-500"
+              : "border-slate-200 hover:border-blue-600 focus:border-blue-600"
+          }`}
       />
+      {error && <p className="text-xs text-red-500 mt-1">{error}</p>}
     </div>
   );
 }
