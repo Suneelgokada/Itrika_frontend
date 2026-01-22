@@ -217,7 +217,7 @@
 // }
 
 
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Mail, Phone, Send, CheckCircle, MapPin } from "lucide-react";
 
 export default function ContactUsPage() {
@@ -250,28 +250,93 @@ export default function ContactUsPage() {
     }
   };
 
+  useEffect(() => {
+  if (isSuccess) {
+    const timer = setTimeout(() => {
+      setIsSuccess(false);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }
+}, [isSuccess]);
+
+
   const handleBlur = (e) => {
     const { name, value } = e.target;
     setTouched((p) => ({ ...p, [name]: true }));
     setErrors((p) => ({ ...p, [name]: validateField(name, value) }));
   };
 
-  const handleSubmit = async (e) => {
+const handleSubmit = async (e) => {
     e.preventDefault();
+
     const newErrors = {};
     Object.keys(formData).forEach((key) => {
       const err = validateField(key, formData[key]);
       if (err) newErrors[key] = err;
     });
     setErrors(newErrors);
+     setTouched({
+    name: true,
+    email: true,
+    phone: true,
+    company: true,
+    message: true,
+  });
+    if (Object.keys(newErrors).length !== 0) return;
 
-    if (Object.keys(newErrors).length === 0) {
-      setIsSubmitting(true);
-      await new Promise((r) => setTimeout(r, 2000));
-      setIsSubmitting(false);
+    setIsSubmitting(true);
+
+    const data = {
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      toMail: "suneelgokada1227@gmail.com",
+      toName: "Itrika Admin",
+      subject: `New Contact Inquiry from ${formData.name}`,
+      message: `
+Name: ${formData.name}
+Email: ${formData.email}
+Phone: ${formData.phone}
+Company: ${formData.company || "N/A"}
+
+Message:
+${formData.message}
+      `,
+    };
+
+    try {
+      const response = await fetch(
+        "https://api.qrdcard.com/api/url/sendmail",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Email sending failed");
+      }
+
       setIsSuccess(true);
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        company: "",
+        message: "",
+      });
+    } catch (error) {
+      alert("Failed to send message. Please try again.");
+      console.error(error);
+    } finally {
+      setIsSubmitting(false);
     }
   };
+
 
   /* ✅ MOBILE input height reduced */
   const inputStyle =
@@ -279,6 +344,14 @@ export default function ContactUsPage() {
 
   const labelStyle =
     "block text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-1";
+
+    const errorTextStyle = "mt-1 text-xs text-red-500 font-medium";
+const getInputStyle = (name) =>
+  `${inputStyle} ${
+    errors[name]
+      ? "border-red-500 focus:border-red-500"
+      : "border-slate-200 focus:border-indigo-600"
+  }`;
 
   return (
     <div className="w-full">
@@ -333,113 +406,122 @@ export default function ContactUsPage() {
         <div className="bg-slate-50 rounded-2xl shadow-xl p-5 sm:p-6 md:p-10">
           <div className="grid md:grid-cols-2 gap-12">
             {/* LEFT: CONTACT FORM */}
-            <div
-              className="
-                bg-white shadow-2xl rounded-xl
-                p-10 sm:p-10
-                max-[425px]:p-5
-                max-[375px]:p-4
-                /* ✅ MOBILE padding reduced */
-              "
-            >
-              {isSuccess ? (
-                <div className="text-center py-20">
-                  <CheckCircle className="w-14 h-14 text-green-500 mx-auto mb-4" />
-                  <h3 className="text-xl font-bold">Message Sent</h3>
-                  <p className="text-slate-500 mt-2">
-                    We will contact you shortly.
-                  </p>
-                </div>
-              ) : (
-                <form
-                  onSubmit={handleSubmit}
-                  className="
-                    space-y-5
-                    max-[425px]:space-y-4
-                    max-[375px]:space-y-3
-                    /* ✅ MOBILE vertical gaps reduced */
-                  "
-                >
-                  <div>
-                    <label className={labelStyle}>Full Name</label>
-                    <input
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      className={inputStyle}
-                    />
-                  </div>
+         <div
+  className="
+    bg-white shadow-2xl rounded-xl
+    p-10 sm:p-10
+    max-[425px]:p-5
+    max-[375px]:p-4
+  "
+>
+  {/* ✅ SUCCESS MESSAGE */}
+{isSuccess && (
+  <div className="mb-6 rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-green-700 text-sm font-medium flex items-center gap-2 animate-fade-in">
+    <CheckCircle className="w-5 h-5 text-green-600" />
+    Message sent successfully. Our team will contact you shortly.
+  </div>
+)}
 
-                  <div className="grid sm:grid-cols-2 gap-5 max-[425px]:gap-4">
-                    <div>
-                      <label className={labelStyle}>Email</label>
-                      <input
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        className={inputStyle}
-                      />
-                    </div>
 
-                    <div>
-                      <label className={labelStyle}>Phone</label>
-                      <input
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        className={inputStyle}
-                      />
-                    </div>
-                  </div>
+  <form
+    onSubmit={handleSubmit}
+    className="
+      space-y-5
+      max-[425px]:space-y-4
+      max-[375px]:space-y-3
+    "
+  >
+   <div>
+  <label className={labelStyle}>Full Name</label>
+  <input
+    name="name"
+    value={formData.name}
+    onChange={handleChange}
+    onBlur={handleBlur}
+    disabled={isSubmitting}
+    className={getInputStyle("name")}
+  />
+  {errors.name && <p className={errorTextStyle}>{errors.name}</p>}
+</div>
 
-                  <div>
-                    <label className={labelStyle}>Company (Optional)</label>
-                    <input
-                      name="company"
-                      value={formData.company}
-                      onChange={handleChange}
-                      className={inputStyle}
-                    />
-                  </div>
 
-                  <div>
-                    <label className={labelStyle}>Message</label>
-                    <textarea
-                      rows="3"
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      className={`${inputStyle} resize-none`}
-                    />
-                  </div>
+    <div className="grid sm:grid-cols-2 gap-5 max-[425px]:gap-4">
+   <div>
+  <label className={labelStyle}>Email</label>
+  <input
+    name="email"
+    value={formData.email}
+    onChange={handleChange}
+    onBlur={handleBlur}
+    disabled={isSubmitting}
+    className={getInputStyle("email")}
+  />
+  {errors.email && <p className={errorTextStyle}>{errors.email}</p>}
+</div>
 
-                  <button
-                   type="submit"
-                   disabled={isSubmitting}
-                   className="
-                     w-full
-                     px-8 md:px-10 py-4
-                     bg-blue-600/80 hover:bg-orange-600/80
-                     text-white font-bold
-                     text-[11px] md:text-xs uppercase tracking-[0.2em]
-                     flex items-center justify-center gap-2
-                     transition-all duration-500
-                     shadow-xl shadow-blue-600/30
-                     active:scale-95
-                     backdrop-blur-sm
-                     disabled:opacity-50 disabled:cursor-not-allowed
-                   "
-                 >
-                   {isSubmitting ? "Processing..." : "Send Inquiry"}
-                   {!isSubmitting && <Send className="w-4 h-4" />}
-                 </button>
-                </form>
-              )}
-            </div>
+
+      <div>
+  <label className={labelStyle}>Phone</label>
+  <input
+    name="phone"
+    value={formData.phone}
+    onChange={handleChange}
+    onBlur={handleBlur}
+    disabled={isSubmitting}
+    className={getInputStyle("phone")}
+  />
+  {errors.phone && <p className={errorTextStyle}>{errors.phone}</p>}
+</div>
+
+    </div>
+
+    <div>
+      <label className={labelStyle}>Company (Optional)</label>
+      <input
+        name="company"
+        value={formData.company}
+        onChange={handleChange}
+        disabled={isSubmitting}
+        className={inputStyle}
+      />
+    </div>
+<div>
+  <label className={labelStyle}>Message</label>
+  <textarea
+    rows="3"
+    name="message"
+    value={formData.message}
+    onChange={handleChange}
+    onBlur={handleBlur}
+    disabled={isSubmitting}
+    className={`${getInputStyle("message")} resize-none`}
+  />
+  {errors.message && <p className={errorTextStyle}>{errors.message}</p>}
+</div>
+
+
+    <button
+      type="submit"
+      disabled={isSubmitting}
+      className="
+        w-full
+        px-8 md:px-10 py-4
+        bg-blue-600/80 hover:bg-orange-600/80
+        text-white font-bold
+        text-[11px] md:text-xs uppercase tracking-[0.2em]
+        flex items-center justify-center gap-2
+        transition-all duration-500
+        shadow-xl shadow-blue-600/30
+        active:scale-95
+        disabled:opacity-50 disabled:cursor-not-allowed
+      "
+    >
+      {isSubmitting ? "Sending..." : "Send Inquiry"}
+      {!isSubmitting && <Send className="w-4 h-4" />}
+    </button>
+  </form>
+</div>
+
 
             {/* RIGHT: MAP */}
             <div className="space-y-3 max-[425px]:space-y-2">
