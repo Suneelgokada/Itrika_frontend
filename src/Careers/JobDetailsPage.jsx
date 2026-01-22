@@ -1,9 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import {
-  ArrowLeft,
-  CheckCircle,
-} from "lucide-react";
+import { ArrowLeft, CheckCircle } from "lucide-react";
 import { jobs } from "./jobData";
 
 export default function JobDetailsPage() {
@@ -13,15 +10,23 @@ export default function JobDetailsPage() {
   const job = jobs.find((j) => j.id === id);
 
   const [formData, setFormData] = useState({
-    fullName: "",
+    name: "",
     email: "",
     phone: "",
     coverLetter: "",
     resume: null,
   });
 
+  const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+
+  useEffect(() => {
+    if (submitSuccess) {
+      const timer = setTimeout(() => setSubmitSuccess(false), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [submitSuccess]);
 
   if (!job) {
     return (
@@ -31,35 +36,108 @@ export default function JobDetailsPage() {
     );
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+  const validate = () => {
+    const newErrors = {};
 
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitSuccess(true);
-    }, 1500);
+    if (!formData.name.trim()) newErrors.name = "Full name is required";
+
+    if (!formData.email.trim())
+      newErrors.email = "Email is required";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email))
+      newErrors.email = "Enter a valid email address";
+
+    if (!formData.phone.trim())
+      newErrors.phone = "Phone number is required";
+    else if (!/^[0-9]{10}$/.test(formData.phone))
+      newErrors.phone = "Enter a valid 10-digit number";
+
+    if (!formData.coverLetter.trim())
+      newErrors.coverLetter = "Cover letter is required";
+
+    if (!formData.resume)
+      newErrors.resume = "Resume is required";
+
+    return newErrors;
   };
 
-  if (submitSuccess) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-50">
-        <div className="bg-white shadow-2xl rounded-2xl p-10 text-center max-w-md">
-          <CheckCircle className="w-14 h-14 text-green-500 mx-auto mb-4" />
-          <h2 className="text-2xl font-bold">Application Submitted</h2>
-          <p className="text-slate-500 mt-2">
-            Our team will contact you shortly.
-          </p>
-          <button
-            onClick={() => navigate("/careers")}
-            className="mt-6 px-6 py-3 bg-blue-600 text-white rounded-lg"
-          >
-            Back to Careers
-          </button>
-        </div>
-      </div>
-    );
-  }
+  const baseInput =
+    "w-full px-4 py-3 bg-transparent border-b-2 outline-none transition";
+
+  const getInputStyle = (field) =>
+    `${baseInput} ${
+      errors[field]
+        ? "border-red-500 focus:border-red-500"
+        : "border-blue-500 focus:border-blue-700"
+    }`;
+
+  const errorText = "mt-1 text-xs text-red-500 font-medium";
+
+  const handleChange = (e) => {
+    const { name, value, files } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: files ? files[0] : value,
+    }));
+
+    if (errors[name]) {
+      setErrors((prev) => ({ ...prev, [name]: "" }));
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const validationErrors = validate();
+    setErrors(validationErrors);
+
+    if (Object.keys(validationErrors).length > 0) return;
+
+    setIsSubmitting(true);
+
+    const data = {
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      toMail: "suneelgokada1227@gmail.com",
+      toName: "Itrika HR",
+      subject: `New Job Application - ${job.title}`,
+      message: `
+Name: ${formData.name}
+Email: ${formData.email}
+Phone: ${formData.phone}
+
+Cover Letter:
+${formData.coverLetter}
+      `,
+    };
+
+    try {
+      const response = await fetch(
+        "https://api.qrdcard.com/api/url/sendmail",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        }
+      );
+
+      if (!response.ok) throw new Error("Mail failed");
+
+      setSubmitSuccess(true);
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        coverLetter: "",
+        resume: null,
+      });
+    } catch (err) {
+      alert("Unable to submit application. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <>
@@ -97,28 +175,82 @@ export default function JobDetailsPage() {
           </div>
 
           {/* RIGHT */}
-          <div className="lg:sticky lg:top-24">
-            <div className="bg-white shadow-2xl rounded-2xl p-6">
-              <h3 className="text-xl font-bold mb-4">
-                Apply for this position
-              </h3>
+         <div className="lg:sticky lg:top-24">
+  <div className="bg-white shadow-2xl rounded-2xl p-6">
+    <h3 className="text-xl font-bold mb-4">
+      Apply for this position
+    </h3>
 
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <input placeholder="Full Name" className="w-full border rounded-lg px-4 py-3" />
-                <input placeholder="Email" className="w-full border rounded-lg px-4 py-3" />
-                <input placeholder="Phone" className="w-full border rounded-lg px-4 py-3" />
-                <textarea rows="4" placeholder="Cover Letter" className="w-full border rounded-lg px-4 py-3" />
-                <input type="file" />
+    <form onSubmit={handleSubmit} className="space-y-4">
 
-                <button
-                  disabled={isSubmitting}
-                  className="w-full py-3 bg-blue-600 text-white rounded-lg font-semibold"
-                >
-                  {isSubmitting ? "Submitting..." : "Submit Application"}
-                </button>
-              </form>
-            </div>
-          </div>
+      <div>
+        <input
+          name="name"
+          placeholder="Full Name"
+          value={formData.name}
+          onChange={handleChange}
+          className={getInputStyle("name")}
+        />
+        {errors.name && <p className={errorText}>{errors.name}</p>}
+      </div>
+
+      <div>
+        <input
+          name="email"
+          placeholder="Email"
+          value={formData.email}
+          onChange={handleChange}
+          className={getInputStyle("email")}
+        />
+        {errors.email && <p className={errorText}>{errors.email}</p>}
+      </div>
+
+      <div>
+        <input
+          name="phone"
+          placeholder="Phone"
+          value={formData.phone}
+          onChange={handleChange}
+          className={getInputStyle("phone")}
+        />
+        {errors.phone && <p className={errorText}>{errors.phone}</p>}
+      </div>
+
+      <div>
+        <textarea
+          name="coverLetter"
+          rows="4"
+          placeholder="Cover Letter"
+          value={formData.coverLetter}
+          onChange={handleChange}
+          className={getInputStyle("coverLetter")}
+        />
+        {errors.coverLetter && (
+          <p className={errorText}>{errors.coverLetter}</p>
+        )}
+      </div>
+
+      <div>
+        <input
+          type="file"
+          name="resume"
+          onChange={handleChange}
+          className="w-full text-sm"
+        />
+        {errors.resume && <p className={errorText}>{errors.resume}</p>}
+      </div>
+
+      <button
+        disabled={isSubmitting}
+        className="w-full py-3 bg-blue-600 text-white rounded-lg font-semibold disabled:opacity-50"
+      >
+        {isSubmitting ? "Submitting..." : "Submit Application"}
+      </button>
+
+    </form>
+  </div>
+</div>
+
         </div>
       </div>
     </>
