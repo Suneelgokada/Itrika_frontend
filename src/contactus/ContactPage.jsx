@@ -215,6 +215,8 @@
 //     </div>
 //   );
 // }
+
+
 import React, { useState } from "react";
 import { Mail, Phone, Send, CheckCircle, MapPin } from "lucide-react";
 
@@ -416,20 +418,25 @@ export default function ContactUsPage() {
                   </div>
 
                   <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="
-                      w-full
-                      py-4 max-[425px]:py-3 max-[375px]:py-2.5
-                      bg-indigo-600 hover:bg-orange-600
-                      text-white uppercase tracking-widest text-xs font-bold
-                      flex items-center justify-center gap-2 rounded-md
-                      /* ✅ MOBILE button height reduced */
-                    "
-                  >
-                    {isSubmitting ? "Processing..." : "Send Inquiry"}
-                    <Send className="w-4 h-4" />
-                  </button>
+                   type="submit"
+                   disabled={isSubmitting}
+                   className="
+                     w-full
+                     px-8 md:px-10 py-4
+                     bg-blue-600/80 hover:bg-orange-600/80
+                     text-white font-bold
+                     text-[11px] md:text-xs uppercase tracking-[0.2em]
+                     flex items-center justify-center gap-2
+                     transition-all duration-500
+                     shadow-xl shadow-blue-600/30
+                     active:scale-95
+                     backdrop-blur-sm
+                     disabled:opacity-50 disabled:cursor-not-allowed
+                   "
+                 >
+                   {isSubmitting ? "Processing..." : "Send Inquiry"}
+                   {!isSubmitting && <Send className="w-4 h-4" />}
+                 </button>
                 </form>
               )}
             </div>
@@ -446,26 +453,47 @@ export default function ContactUsPage() {
                 />
               </div>
 
-              <div className="bg-indigo-700 text-white rounded-xl p-8 space-y-5 max-[425px]:p-6">
-                <div className="flex items-start gap-3">
-                  <MapPin />
-                  <p>
-                    1821 Walden Office Square, Suite 400,
-                    <br />
-                    Schaumburg, Illinois, 60173
-                  </p>
-                </div>
+         <div className="bg-blue-600/80 backdrop-blur-md text-white rounded-xl p-8 space-y-6 max-[425px]:p-6 shadow-2xl shadow-blue-900/20 border border-white/10">
+  
+  {/* Address Section */}
+  <div className="flex items-start gap-4 group cursor-pointer">
+    <div className="p-2 bg-white/10 rounded-lg group-hover:bg-orange-500/20 transition-all duration-300">
+      <MapPin className="w-5 h-5 text-blue-100 group-hover:text-orange-400 transition-colors duration-300" />
+    </div>
+    <div className="flex flex-col">
+      <span className="text-[10px] uppercase tracking-widest text-blue-200 font-semibold mb-1 group-hover:text-orange-200 transition-colors">Our Location</span>
+      <p className="text-sm md:text-base leading-relaxed font-medium">
+        1821 Walden Office Square, Suite 400,
+        <br />
+        <span className="text-white/90">Schaumburg, Illinois, 60173</span>
+      </p>
+    </div>
+  </div>
 
-                <div className="flex items-center gap-3">
-                  <Phone />
-                  <p>+1 (555) 012 3456</p>
-                </div>
+  {/* Phone Section */}
+  <div className="flex items-center gap-4 group cursor-pointer">
+    <div className="p-2 bg-white/10 rounded-lg group-hover:bg-orange-500/20 transition-all duration-300">
+      <Phone className="w-5 h-5 text-blue-100 group-hover:text-orange-400 transition-colors duration-300" />
+    </div>
+    <div className="flex flex-col">
+      <span className="text-[10px] uppercase tracking-widest text-blue-200 font-semibold group-hover:text-orange-200 transition-colors">Call Us</span>
+      <p className="text-sm md:text-base font-bold tracking-wide">+1 (555) 012 3456</p>
+    </div>
+  </div>
 
-                <div className="flex items-center gap-3">
-                  <Mail />
-                  <p>support@itrikainc.com</p>
-                </div>
-              </div>
+  {/* Email Section */}
+  <div className="flex items-center gap-4 group cursor-pointer">
+    <div className="p-2 bg-white/10 rounded-lg group-hover:bg-orange-500/20 transition-all duration-300">
+      <Mail className="w-5 h-5 text-blue-100 group-hover:text-orange-400 transition-colors duration-300" />
+    </div>
+    <div className="flex flex-col">
+      <span className="text-[10px] uppercase tracking-widest text-blue-200 font-semibold group-hover:text-orange-200 transition-colors">Email Us</span>
+      <p className="text-sm md:text-base font-medium group-hover:text-white transition-colors">
+        support@itrikainc.com
+      </p>
+    </div>
+  </div>
+</div>
             </div>
             {/* END MAP */}
           </div>

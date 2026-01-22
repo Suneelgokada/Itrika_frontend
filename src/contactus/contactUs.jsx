@@ -224,14 +224,28 @@ export default function ContactUs() {
                   )}
                 </div>
 
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full py-3 bg-indigo-600 hover:bg-slate-900 text-white uppercase tracking-widest text-xs font-bold flex items-center justify-center gap-2 rounded-md"
-                >
-                  {isSubmitting ? "Processing..." : "Send Inquiry"}
-                  <Send className="w-4 h-4" />
-                </button>
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="
+    w-full
+    px-8 md:px-10 py-4
+    bg-blue-600/80 hover:bg-orange-600/80
+    text-white font-bold
+    text-[11px] md:text-xs uppercase tracking-[0.2em]
+    flex items-center justify-center gap-2
+    transition-all duration-500
+    shadow-xl shadow-blue-600/30
+    active:scale-95
+    backdrop-blur-sm
+    disabled:opacity-50 disabled:cursor-not-allowed
+  "
+                  >
+                    {isSubmitting ? "Processing..." : "Send Inquiry"}
+                    {!isSubmitting && <Send className="w-4 h-4" />}
+                  </button>
+
+
               </form>
             )}
           </div>

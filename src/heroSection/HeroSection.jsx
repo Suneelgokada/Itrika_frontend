@@ -185,66 +185,45 @@ export default function PremiumHero() {
   }, []);
 
   return (
-    <div className="relative min-h-screen flex items-center overflow-hidden">
-      
+    <section className="relative min-h-screen flex items-center overflow-hidden pt-24 lg:pt-28">
       {/* --- BACKGROUND IMAGE --- */}
       <div className="absolute inset-0 z-0">
         <img
-          src="hero4.png"
+          //src="hero2.png"
+          src="/14622.jpg"
           alt="IT Consulting Background"
-          className="w-full h-full object-cover object-right lg:object-center"
+          className="w-full h-full object-cover object-center"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#0f172a] via-[#0f172a]/80 to-transparent lg:from-[#0f172a]/90 lg:via-[#0f172a]/60 lg:to-transparent" />
       </div>
 
       {/* --- CONTENT AREA --- */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 w-full">
-        <div className="grid lg:grid-cols-2 items-center">
-          
-          {/* ✅ xl and above → move content 20px left ONLY */}
+        <div className="grid lg:grid-cols-2 items-center gap-12">
+          {/* Left Content */}
           <div
             className={`space-y-8 transition-all duration-1000 transform text-left
               ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"}
               xl:-ml-[20px]
             `}
           >
-            {/* Badge – stable for md & lg */}
-          <div className="
-    /* Base Styles (Default for very small screens) */
-    inline-flex items-center gap-2 px-4 py-2 
-    bg-orange-500/10 border border-orange-500/30 rounded-full text-orange-400
-    tracking-widest uppercase shadow-sm backdrop-blur-md
-    
-    /* Font Size & Weight Adjustments */
-    text-[14px] font-bold      /* Default mobile size */
-    md:text-xs md:font-semibold /* Desktop sizes */
-    lg:text-xs lg:font-semibold
-    
-    /* Specific Positioning (Margin Top) */
-    mt-6 mb-4                  /* Default mobile margin (kindhaki dhinchadaniki) */
-    md:mt-0 md:mb-4            /* Desktop lo normal ga untundi */
+            {/* Badge */}
+            <div className="
+              inline-flex items-center gap-2 px-4 py-2 
+              bg-orange-500/10 border border-orange-500/30 rounded-full text-orange-400
+              tracking-widest uppercase shadow-sm backdrop-blur-md
+              text-[13px] sm:text-[14px] font-semibold
+              mb-6 sm:mb-8 md:mb-10
+            ">
+              <Sparkles className="w-4 h-4 shrink-0" />
+              <span className="whitespace-nowrap">Empowering Innovation</span>
+            </div>
 
-    /* Extra 'Large-Mobile' specific tweak using arbitrary values */
-    /* 375px to 425px range lo inka adjustment kavali ante: */
-    min-[375px]:mt-8 
-    min-[375px]:scale-110      /* Range lo koncham peddhaga kanipisthundi */
-    max-[425px]:mt-8
-  ">
-  <Sparkles className="w-4 h-4" />
-  <span>Empowering Innovation</span>
-</div>
-
-            {/* Heading – reduced on md & lg ONLY */}
+            {/* Heading */}
             <h1
               className="
-                text-5xl
-                md:text-[42px]
-                lg:text-[48px]
-                xl:text-7xl
-                font-[700]
-                md:font-[600]
-                lg:font-[600]
-                text-white leading-tight tracking-tight
+                text-[32px] sm:text-[40px] md:text-[48px] lg:text-[56px] xl:text-[64px]
+                font-bold text-white leading-[1.2] tracking-tight
               "
             >
               Future-Ready <br />
@@ -253,53 +232,48 @@ export default function PremiumHero() {
               </span>
             </h1>
 
-            {/* Paragraph – reduced on md & lg */}
+            {/* Paragraph */}
             <p
               className="
-                text-lg
-                md:text-[16px]
-                lg:text-[17px]
-                xl:text-xl
+                text-[15px] sm:text-[16px] md:text-[18px] lg:text-[19px] xl:text-[20px]
                 text-slate-200 max-w-xl leading-relaxed
-                font-[500] md:font-[400]
-                drop-shadow-md
+                font-medium drop-shadow-md
               "
             >
               ITrika Inc. helps organizations navigate the digital landscape with
               <span className="text-blue-400 font-bold">
-                {" "}
-                bespoke tech solutions{" "}
+                {" "} bespoke tech solutions {" "}
               </span>
               and cutting-edge industry expertise.
             </p>
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row items-start gap-6 pt-6">
-              <button className="px-10 py-4 bg-orange-500 hover:bg-orange-600 text-white font-[700] rounded-full shadow-lg shadow-orange-500/30 transition-all duration-400 flex items-center gap-3 group">
+              <button className="px-8 py-4 bg-orange-500 hover:bg-orange-600 text-white text-[16px] font-bold rounded-full shadow-lg shadow-orange-500/30 transition-all duration-300 flex items-center gap-3 group">
                 Work With Us
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
 
-              <button className="px-10 py-4 bg-white/5 border-2 border-white/20 hover:border-blue-500 text-white font-[700] rounded-full hover:bg-white/10 transition-all duration-300 backdrop-blur-sm">
+              <button className="px-8 py-4 bg-white/5 border-2 border-white/20 hover:border-blue-500 text-white text-[16px] font-bold rounded-full hover:bg-white/10 transition-all duration-300 backdrop-blur-sm">
                 Our Services
               </button>
             </div>
 
             {/* Trust Indicator */}
-            <div className="pt-12 border-t border-white/10 inline-block">
-              <p className="text-xs font-[700] text-slate-400 uppercase tracking-[0.3em]">
+            <div className="pt-10 border-t border-white/10 inline-block">
+              <p className="text-[12px] font-bold text-slate-400 uppercase tracking-[0.25em]">
                 Trusted by industry leaders worldwide
               </p>
             </div>
           </div>
 
-          {/* Right spacer */}
+          {/* Right Spacer / Image Area */}
           <div className="hidden lg:block" />
         </div>
       </div>
 
-      {/* Glow */}
+      {/* Glow Effect */}
       <div className="absolute bottom-0 left-0 w-full lg:w-1/2 h-64 bg-gradient-to-tr from-blue-600/10 to-transparent z-0 pointer-events-none" />
-    </div>
+    </section>
   );
 }

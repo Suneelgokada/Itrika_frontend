@@ -87,14 +87,19 @@ import {
 } from "react-icons/fa";
 
 /* IMAGE IMPORTS */
-import cloudDesktopImg from "../assets/services/clouddesktop.png";
+
 import cyberImg from "../assets/services/cybersecurity.png";
 import softwareImg from "../assets/services/softwareeng.png";
 import networkImg from "../assets/services/networksol.png";
 import supportImg from "../assets/services/supportcon.png";
 import defaultImg from "../assets/services/image.png";
 import desktopImg from "../assets/services/desktop.png";
-
+import clouddesktop from "../../public/saas-concept-collage.jpg";
+import cloud from "../../public/image.png";
+import support from "../../public/support.png";
+import managed from "../../public/managedit.png";
+import software from "../../public/software.png";
+import network from "../../public/networksol.png"
 export const servicesData = [
   {
     id: 1,
@@ -103,7 +108,7 @@ export const servicesData = [
       "Our cloud services provide instant access to computing storage resources online, enabling scalable efficiency.",
     icon: FaCloud,
     link: "/services/cloud-solutions",
-    image: cloudDesktopImg,
+    image: clouddesktop,
   },
   {
     id: 2,
@@ -111,8 +116,8 @@ export const servicesData = [
     description:
       "Network management, data backup, cybersecurity, and IT support services.",
     icon: FaServer,
-    link: "/services/managed-it",
-    image: cyberImg,
+    link: "/services/managed-it-solutions",
+    image: managed,
   },
   {
     id: 3,
@@ -121,7 +126,7 @@ export const servicesData = [
       "Custom software engineering services tailored to your unique business needs.",
     icon: FaCode,
     link: "/services/software-engineering",
-    image: softwareImg,
+    image: software,
   },
   {
     id: 4,
@@ -129,8 +134,8 @@ export const servicesData = [
     description:
       "Seamless cloud desktop services enabling efficient remote work.",
     icon: FaDesktop,
-    link: "/services/desktop",
-    image: desktopImg,
+    link: "/services/cloud-desktop",
+    image: cloud,
   },
   {
     id: 5,
@@ -139,7 +144,7 @@ export const servicesData = [
       "Reliable cloud and networking resources tailored to your business needs.",
     icon: FaNetworkWired,
     link: "/services/network-solutions",
-    image: networkImg,
+    image: network,
   },
   {
     id: 6,
@@ -148,6 +153,6 @@ export const servicesData = [
       "Expert consulting services delivering innovative solutions.",
     icon: FaHandsHelping,
     link: "/services/support-consulting",
-    image: supportImg,
+    image: support,
   },
 ];

@@ -1,5 +1,5 @@
 import React from 'react';
-import { CheckCircle2 } from 'lucide-react';
+import { CheckCircle2, ArrowRight} from 'lucide-react';
 
 export default function AboutUs() {
   // Provided content nundi 5 key points
@@ -12,31 +12,34 @@ export default function AboutUs() {
   ];
 
   return (
-    <section id="about" className="py-12 md:py-20 lg:py-28 bg-white overflow-hidden">
+    <section id="about" className="pt-16 md:pt-20 lg:pt-24 pb-12 md:pb-20 lg:pb-28 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
         {/* Grid: Mobile lo single column, LG screens nundi two columns */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center">
           
           {/* --- IMAGE SECTION --- */}
           {/* order-2 lg:order-1: Mobile lo text tharvatha image vasthundi, Desktop lo left side untundi */}
-          <div className="relative group order-2 lg:order-1 w-full max-w-2xl mx-auto lg:mx-0">
-            {/* Background Decorative Glow */}
-            <div className="absolute -inset-4 bg-blue-500/5 rounded-full blur-3xl group-hover:bg-orange-500/10 transition-all duration-700"></div>
-            
-            <div className="relative overflow-hidden rounded-2xl shadow-lg">
-              <img 
-                src="/about.png" 
-                alt="Itrika Team Collaboration" 
-                className="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-105"
-              />
-            </div>
+          {/* --- IMAGE SECTION --- */}
+<div className="relative group order-2 lg:order-1 w-full">
+  {/* Background Decorative Glow */}
+  <div className="absolute -inset-4 bg-blue-500/5 rounded-full blur-3xl group-hover:bg-orange-500/10 transition-all duration-700"></div>
+  
+  <div className="relative overflow-hidden rounded-2xl shadow-lg">
+    <img 
+      src="/aboutimage.png"
+      // src="/about.png"
+      alt="Itrika Team Collaboration" 
+      className="w-full h-[300px] sm:h-[400px] md:h-[450px] lg:h-[500px] object-cover transform transition-transform duration-700 group-hover:scale-105"
+    />
+  </div>
 
-            {/* Floating Experience Card - Hidden on very small mobiles */}
-            <div className="absolute -bottom-6 -right-6 hidden sm:block bg-blue-600 p-4 md:p-6 rounded-xl shadow-2xl text-white">
-              <p className="text-2xl md:text-3xl font-bold">10+</p>
-              <p className="text-[10px] md:text-xs uppercase tracking-widest font-semibold opacity-90">Years Experience</p>
-            </div>
-          </div>
+  {/* Floating Experience Card */}
+  <div className="absolute bottom-4 right-4 hidden sm:block bg-blue-600 p-4 md:p-6 rounded-xl shadow-2xl text-white">
+    <p className="text-2xl md:text-3xl font-bold">10+</p>
+    <p className="text-[10px] md:text-xs uppercase tracking-widest font-semibold opacity-90">Years Experience</p>
+  </div>
+</div>
+
 
           {/* --- CONTENT SECTION --- */}
           <div className="space-y-6 md:space-y-8 order-1 lg:order-2">
@@ -71,12 +74,41 @@ export default function AboutUs() {
               ))}
             </ul>
 
-            {/* Responsive CTA Button */}
-            <div className="pt-4 md:pt-6">
-              <button className="w-full sm:w-auto px-8 md:px-10 py-4 bg-blue-600 hover:bg-slate-900 text-white font-bold text-[11px] md:text-xs uppercase tracking-[0.2em] transition-all duration-500 shadow-xl shadow-blue-600/20 active:scale-95">
-                About Our Partnership
+        {/* Responsive CTA Button */}
+            <div className="pt-6 md:pt-8">
+              <button
+                className="
+      group relative overflow-hidden
+      w-full sm:w-auto
+      px-8 md:px-10 py-4
+      bg-blue-600 text-white font-bold
+      text-[11px] md:text-xs uppercase tracking-[0.2em]
+      transition-all duration-500
+      shadow-xl shadow-blue-600/30
+      active:scale-95
+      flex items-center justify-center gap-3
+    "
+              >
+                {/* Hover Background Slide Effect */}
+                <span className="absolute inset-0 bg-orange-600 translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-500 ease-out"></span>
+
+                {/* Button Text */}
+                <span className="relative z-10 transition-colors duration-500 group-hover:text-white">
+                  About Our Partnership
+                </span>
+
+                {/* Animated Arrow Icon */}
+                <div className="relative z-10 overflow-hidden w-4 h-4">
+                  <div className="flex transition-transform duration-500 transform group-hover:translate-x-5">
+                    {/* Normal State Arrow */}
+                    <ArrowRight className="w-4 h-4 shrink-0 transition-all" />
+                    {/* Hidden Arrow that slides in */}
+                    <ArrowRight className="w-4 h-4 shrink-0 -translate-x-10 group-hover:-translate-x-4 transition-all" />
+                  </div>
+                </div>
               </button>
             </div>
+
           </div>
 
         </div>
