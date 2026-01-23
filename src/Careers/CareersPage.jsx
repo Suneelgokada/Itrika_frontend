@@ -169,3 +169,208 @@ export default function CareersPage() {
     </div>
   );
 }
+
+// import React, { useState } from "react";
+// import { Search, ChevronDown, ArrowRight, Briefcase, MapPin, GraduationCap } from "lucide-react";
+// import { useNavigate } from "react-router-dom";
+// import { jobs } from "./jobData"; // ✅ 17 unique roles data
+
+// export default function CareersPage() {
+//   const [search, setSearch] = useState("");
+//   const [category, setCategory] = useState("All Eligibility");
+//   const [jobType, setJobType] = useState("All Workspace");
+//   const [location, setLocation] = useState("All Job Location");
+//   const navigate = useNavigate();
+
+//   // Dynamic dropdown data extraction from the jobs list
+//   const categories = ["All Eligibility", ...new Set(jobs.map(job => job.category))];
+//   const jobTypes = ["All Workspace", ...new Set(jobs.map(job => job.workspace))];
+//   const locations = ["All Job Location", ...new Set(jobs.map(job => job.location))];
+
+//   // Logic to prevent white screen - ensures all active filters work together
+//   const filteredJobs = jobs.filter((job) => {
+//     const matchesSearch =
+//       job.title.toLowerCase().includes(search.toLowerCase()) ||
+//       job.summary.toLowerCase().includes(search.toLowerCase());
+
+//     const matchesCategory =
+//       category === "All Eligibility" || job.category === category;
+
+//     const matchesJobType =
+//       jobType === "All Workspace" || job.workspace === jobType;
+
+//     const matchesLocation =
+//       location === "All Job Location" || job.location.includes(location);
+
+//     return matchesSearch && matchesCategory && matchesJobType && matchesLocation;
+//   });
+
+//   return (
+//     <div className="min-h-screen bg-[#f8fafc]">
+//       {/* ================= HERO BANNER ================= */}
+//       <section className="relative py-20 bg-[#085482] overflow-hidden">
+//         {/* Logo inspired backgrounds */}
+//         <div className="absolute inset-0 opacity-20">
+//           <div className="absolute top-0 left-0 w-96 h-96 bg-sky-400 rounded-full -translate-x-1/2 -translate-y-1/2 blur-3xl"></div>
+//           <div className="absolute bottom-0 right-0 w-64 h-64 bg-[#ff872b] rounded-full translate-x-1/2 translate-y-1/2 blur-3xl"></div>
+//         </div>
+
+//         <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
+//           <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/10 border border-white/20 rounded-full text-xs font-bold text-sky-300 uppercase tracking-widest mb-6">
+//             <GraduationCap size={14} />
+//             <span>F-1 Student Opportunities</span>
+//           </div>
+//           <h1 className="text-white text-4xl md:text-5xl font-extrabold mb-6">
+//             Careers at <span className="text-[#ff872b]">ITRIKA</span>
+//           </h1>
+//           <p className="max-w-2xl mx-auto text-sky-100 text-lg leading-relaxed">
+//             Specialized training programs in .NET, Java, Data Science, and more. 
+//             Designed specifically for OPT and STEM OPT graduates.
+//           </p>
+//           <div className="h-1.5 w-24 bg-gradient-to-r from-[#ff872b] to-[#e6761f] rounded-full mx-auto mt-8 shadow-lg"></div>
+//         </div>
+//       </section>
+
+//       {/* ================= SEARCH & FILTER BAR ================= */}
+//       <div className="max-w-7xl mx-auto px-6 -mt-10">
+//         <div className="bg-white p-6 rounded-[24px] shadow-xl shadow-blue-900/10 border border-slate-100 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          
+//           {/* Search Input */}
+//           <div className="relative">
+//             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+//             <input
+//               type="text"
+//               placeholder="Search roles..."
+//               value={search}
+//               onChange={(e) => setSearch(e.target.value)}
+//               className="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-[#085482] outline-none transition-all font-medium"
+//             />
+//           </div>
+
+//           {/* Eligibility Filter */}
+//           <div className="relative">
+//             <select
+//               value={category}
+//               onChange={(e) => setCategory(e.target.value)}
+//               className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl appearance-none cursor-pointer focus:ring-2 focus:ring-[#085482] outline-none font-semibold text-slate-700"
+//             >
+//               {categories.map((cat) => (
+//                 <option key={cat} value={cat}>{cat}</option>
+//               ))}
+//             </select>
+//             <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" size={18} />
+//           </div>
+
+//           {/* Workspace Filter */}
+//           <div className="relative">
+//             <select
+//               value={jobType}
+//               onChange={(e) => setJobType(e.target.value)}
+//               className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl appearance-none cursor-pointer focus:ring-2 focus:ring-[#085482] outline-none font-semibold text-slate-700"
+//             >
+//               {jobTypes.map((type) => (
+//                 <option key={type} value={type}>{type}</option>
+//               ))}
+//             </select>
+//             <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" size={18} />
+//           </div>
+
+//           {/* Location Filter */}
+//           <div className="relative">
+//             <select
+//               value={location}
+//               onChange={(e) => setLocation(e.target.value)}
+//               className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl appearance-none cursor-pointer focus:ring-2 focus:ring-[#085482] outline-none font-semibold text-slate-700"
+//             >
+//               {locations.map((loc) => (
+//                 <option key={loc} value={loc}>{loc}</option>
+//               ))}
+//             </select>
+//             <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" size={18} />
+//           </div>
+
+//         </div>
+//       </div>
+
+//       {/* ================= JOB LISTINGS ================= */}
+//       <section className="max-w-7xl mx-auto px-6 py-16">
+//         <div className="flex items-center justify-between mb-8 border-l-4 border-[#ff872b] pl-4">
+//           <h2 className="text-2xl font-bold text-slate-900">
+//             Open Training Positions ({filteredJobs.length})
+//           </h2>
+//         </div>
+
+//         <div className="space-y-4">
+//           {filteredJobs.length > 0 ? (
+//             filteredJobs.map((job) => (
+//               <div
+//                 key={job.id}
+//                 className="group bg-white rounded-2xl p-6 border border-slate-200 hover:border-[#ff872b] hover:shadow-lg transition-all duration-300"
+//               >
+//                 <div className="flex flex-col lg:flex-row lg:items-center gap-6">
+//                   <div className="flex-grow text-left">
+//                     <div className="flex items-center gap-3 mb-2">
+//                       <h3 className="text-xl font-bold text-slate-900 group-hover:text-[#085482] transition-colors text-left">
+//                         {job.title}
+//                       </h3>
+//                       <span className={`px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider ${
+//                         job.category.includes("STEM") 
+//                         ? "bg-sky-100 text-[#085482]" 
+//                         : "bg-slate-100 text-slate-600"
+//                       }`}>
+//                         {job.category}
+//                       </span>
+//                     </div>
+                    
+//                     <div className="flex flex-wrap gap-4 text-sm text-slate-500 font-medium">
+//                       <div className="flex items-center gap-1.5">
+//                         <MapPin size={16} className="text-[#ff872b]" />
+//                         {job.location}
+//                       </div>
+//                       <div className="flex items-center gap-1.5">
+//                         <Briefcase size={16} className="text-sky-500" />
+//                         {job.workspace}
+//                       </div>
+//                     </div>
+//                   </div>
+
+//                   <div className="hidden xl:block max-w-md text-sm text-slate-600 line-clamp-2 italic border-l border-slate-100 pl-4 text-left">
+//                     {job.summary}
+//                   </div>
+
+//                   <button
+//                     onClick={() => navigate(`/careers/${job.id}`)}
+//                     className="flex items-center justify-center gap-2 px-6 py-3 bg-[#085482] text-white rounded-xl font-bold hover:bg-[#063d5e] transition-all whitespace-nowrap group"
+//                   >
+//                     View Role
+//                     <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform text-[#ff872b]" />
+//                   </button>
+//                 </div>
+//               </div>
+//             ))
+//           ) : (
+//             <div className="text-center py-20 bg-white rounded-3xl border border-dashed border-slate-300">
+//               <p className="text-slate-500 font-medium italic">Oops! No positions found matching your criteria.</p>
+//             </div>
+//           )}
+//         </div>
+
+//         {/* ================= FOOTER CTA ================= */}
+//         <div className="mt-20 bg-gradient-to-br from-[#085482] to-[#063d5e] rounded-[40px] p-10 md:p-16 text-center text-white relative overflow-hidden shadow-2xl">
+//           <div className="relative z-10">
+//             <h2 className="text-3xl font-bold mb-4 italic uppercase tracking-wider">Interested in joining ITRIKA?</h2>
+//             <p className="text-sky-100 mb-8 max-w-xl mx-auto">
+//               Please send your resume, Form I-20, and OPT start date details directly to our hiring team.
+//             </p>
+//             <a 
+//               href="mailto:hire@itrika-inc.com" 
+//               className="inline-block px-10 py-4 bg-[#ff872b] text-white font-bold rounded-2xl hover:scale-105 transition-all text-lg shadow-lg hover:bg-[#e6761f]"
+//             >
+//               hire@itrika-inc.com
+//             </a>
+//           </div>
+//         </div>
+//       </section>
+//     </div>
+//   );
+// }

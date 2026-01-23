@@ -59,6 +59,8 @@ import "./index.css";
 import SoftwareEngineering from "./servicepages/softwareengineering/SoftwareEngineering";
 import CloudDesktop from "./servicepages/cloudDesktop/CloudDesktop";
 import NetworkSolutions from "./servicepages/networksolutions/NetworkSolutions";
+import SupportConsultingSection from "./servicepages/supportconsulting/SupportConsulting";
+import SupportConsulting from "./servicepages/supportconsulting/SupportConsulting";
 
 function App() {
   return (
@@ -83,6 +85,7 @@ function App() {
        <Route path="/services/software-engineering" element={<SoftwareEngineering />} />
       <Route path="/services/cloud-desktop" element={<CloudDesktop />} />
            <Route path="/services/network-solutions" element={<NetworkSolutions />} />
+           <Route path="/services/support-consulting" element={<SupportConsulting/>}/>
       </Routes>
 
       <Footer />

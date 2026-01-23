@@ -99,7 +99,7 @@ export default function JobDetailsPage() {
       name: formData.name,
       email: formData.email,
       phone: formData.phone,
-      toMail: "suneelgokada1227@gmail.com",
+      toMail: "hire@itrika-inc.com",
       toName: "Itrika HR",
       subject: `New Job Application - ${job.title}`,
       message: `

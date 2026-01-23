@@ -29,10 +29,21 @@ export default function PremiumHeader({ onContactClick }) {
       setIsMobileMenuOpen(false);
       return;
     }
+  
+   if (window.location.pathname !== "/") {
+    // ఒకవేళ యూజర్ హోమ్ పేజీలో లేకపోతే
+    navigate("/");
+    setTimeout(() => {
+      const section = document.querySelector(item.href);
+      if (section) section.scrollIntoView({ behavior: "smooth" });
+    }, 100);
+  } else {
+    // హోమ్ పేజీలోనే ఉంటే
     const section = document.querySelector(item.href);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
+    if (section) section.scrollIntoView({ behavior: "smooth" });
+  }
+
+
     setIsMobileMenuOpen(false);
   };
 
@@ -127,7 +138,7 @@ export default function PremiumHeader({ onContactClick }) {
       </div>
 
       {/* ================= MOBILE DRAWER ================= */}
-      {isMobileMenuOpen && (
+      {/* {isMobileMenuOpen && (
         <div
           className={`lg:hidden border-t backdrop-blur-xl animate-in slide-in-from-top duration-300 bg-white/98 border-slate-100`}
         >
@@ -143,7 +154,25 @@ export default function PremiumHeader({ onContactClick }) {
             ))}
           </div>
         </div>
-      )}
+      )} */}
+
+
+      {/* ================= MOBILE DRAWER ================= */}
+{isMobileMenuOpen && (
+  <div className="lg:hidden border-t backdrop-blur-xl bg-white border-slate-100 shadow-xl">
+    <div className="px-6 py-6 space-y-2">
+      {navItems.map((item, index) => (
+        <button
+          key={index}
+          onClick={() => handleNavClick(item)}
+          className="block w-full text-left px-4 py-3 rounded-xl text-base font-bold transition-all text-slate-800 hover:bg-slate-50"
+        >
+          {item.name}
+        </button>
+      ))}
+    </div>
+  </div>
+)}
     </header>
   );
 }

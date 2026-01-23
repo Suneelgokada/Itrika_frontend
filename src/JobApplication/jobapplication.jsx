@@ -529,14 +529,21 @@ export default function JobApplicationForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
-  const positions = [
-    ".Net Developer",
-    "AI/ML Developer",
-    "ServiceNow Developer",
-    "Java Developer",
-    "Programmer Analyst",
-    "System Admin",
-  ];
+const positions = [
+  ".NET Developer",
+  "Java Developer",
+  "Python Developer",
+  "AI / ML Engineer",
+  "Data Scientist",
+  "Data Analyst",
+  "Data Engineer",
+  "SAP Consultant",
+  "Cyber Security Analyst",
+  "QA / Software Tester",
+  "DevOps Engineer",
+  "Cloud Engineer",
+  "UI/UX Designer"
+];
 
   /* ================= AUTO HIDE SUCCESS (3 SEC) ================= */
   useEffect(() => {
@@ -596,7 +603,7 @@ export default function JobApplicationForm() {
       name: formData.firstName,
       email: formData.email,
       phone: formData.phone,
-      toMail: "suneelgokada1227@gmail.com",
+      toMail: "hire@itrika-inc.com",
       toName: "Itrika HR",
       subject: `Job Application - ${formData.position}`,
       message: `

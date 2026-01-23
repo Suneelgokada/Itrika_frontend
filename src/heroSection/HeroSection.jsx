@@ -174,6 +174,111 @@
 //   );
 // }
 
+// import React, { useState, useEffect } from "react";
+// import { ArrowRight, Sparkles } from "lucide-react";
+
+// export default function PremiumHero() {
+//   const [isVisible, setIsVisible] = useState(false);
+
+//   useEffect(() => {
+//     setIsVisible(true);
+//   }, []);
+
+//   return (
+//     <section className="relative min-h-screen flex items-center overflow-hidden pt-24 lg:pt-28">
+//       {/* --- BACKGROUND IMAGE --- */}
+//       <div className="absolute inset-0 z-0">
+//         <img
+//           //src="hero2.png"
+//           src="/14622.jpg"
+//           alt="IT Consulting Background"
+//           className="w-full h-full object-cover object-center"
+//         />
+//         <div className="absolute inset-0 bg-gradient-to-r from-[#0f172a] via-[#0f172a]/80 to-transparent lg:from-[#0f172a]/90 lg:via-[#0f172a]/60 lg:to-transparent" />
+//       </div>
+
+//       {/* --- CONTENT AREA --- */}
+//       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 w-full">
+//         <div className="grid lg:grid-cols-2 items-center gap-12">
+//           {/* Left Content */}
+//           <div
+//             className={`space-y-8 transition-all duration-1000 transform text-left
+//               ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"}
+//               xl:-ml-[20px]
+//             `}
+//           >
+//             {/* Badge */}
+//             <div className="
+//               inline-flex items-center gap-2 px-4 py-2 
+//               bg-orange-500/10 border border-orange-500/30 rounded-full text-orange-400
+//               tracking-widest uppercase shadow-sm backdrop-blur-md
+//               text-[13px] sm:text-[14px] font-semibold
+//               mb-6 sm:mb-8 md:mb-10
+//             ">
+//               <Sparkles className="w-4 h-4 shrink-0" />
+//               <span className="whitespace-nowrap">Empowering Innovation</span>
+//             </div>
+
+//             {/* Heading */}
+//             <h1
+//               className="
+//                 text-[32px] sm:text-[40px] md:text-[48px] lg:text-[56px] xl:text-[64px]
+//                 font-bold text-white leading-[1.2] tracking-tight
+//               "
+//             >
+//               Future-Ready <br />
+//               <span className="text-orange-500 drop-shadow-sm">
+//                 IT Consulting
+//               </span>
+//             </h1>
+
+//             {/* Paragraph */}
+//             <p
+//               className="
+//                 text-[15px] sm:text-[16px] md:text-[18px] lg:text-[19px] xl:text-[20px]
+//                 text-slate-200 max-w-xl leading-relaxed
+//                 font-medium drop-shadow-md
+//               "
+//             >
+//               ITrika Inc. helps organizations navigate the digital landscape with
+//               <span className="text-blue-400 font-bold">
+//                 {" "} bespoke tech solutions {" "}
+//               </span>
+//               and cutting-edge industry expertise.
+//             </p>
+
+//             {/* CTA Buttons */}
+//             <div className="flex flex-col sm:flex-row items-start gap-6 pt-6">
+//               <button className="px-8 py-4 bg-orange-500 hover:bg-orange-600 text-white text-[16px] font-bold rounded-full shadow-lg shadow-orange-500/30 transition-all duration-300 flex items-center gap-3 group">
+//                 Work With Us
+//                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+//               </button>
+
+//               <button className="px-8 py-4 bg-white/5 border-2 border-white/20 hover:border-blue-500 text-white text-[16px] font-bold rounded-full hover:bg-white/10 transition-all duration-300 backdrop-blur-sm">
+//                 Our Services
+//               </button>
+//             </div>
+
+//             {/* Trust Indicator */}
+//             <div className="pt-10 border-t border-white/10 inline-block">
+//               <p className="text-[12px] font-bold text-slate-400 uppercase tracking-[0.25em]">
+//                 Trusted by industry leaders worldwide
+//               </p>
+//             </div>
+//           </div>
+
+//           {/* Right Spacer / Image Area */}
+//           <div className="hidden lg:block" />
+//         </div>
+//       </div>
+
+//       {/* Glow Effect */}
+//       <div className="absolute bottom-0 left-0 w-full lg:w-1/2 h-64 bg-gradient-to-tr from-blue-600/10 to-transparent z-0 pointer-events-none" />
+//     </section>
+//   );
+// }
+
+
 import React, { useState, useEffect } from "react";
 import { ArrowRight, Sparkles } from "lucide-react";
 
@@ -185,49 +290,52 @@ export default function PremiumHero() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden pt-24 lg:pt-28">
+    <section className="relative min-h-screen flex items-center overflow-hidden pt-20 lg:pt-28 bg-[#0f172a]">
       {/* --- BACKGROUND IMAGE --- */}
       <div className="absolute inset-0 z-0">
         <img
-          //src="hero2.png"
           src="/14622.jpg"
           alt="IT Consulting Background"
-          className="w-full h-full object-cover object-center"
+          className="w-full h-full object-cover object-center lg:object-right opacity-60 lg:opacity-100"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0f172a] via-[#0f172a]/80 to-transparent lg:from-[#0f172a]/90 lg:via-[#0f172a]/60 lg:to-transparent" />
+        {/* Mobile View Gradient (Stronger Overlay) */}
+        <div className="absolute inset-0 z-10 bg-slate-950/70 sm:bg-slate-950/50 lg:hidden" />
+        
+        {/* Desktop View Gradient */}
+        <div className="hidden lg:block absolute inset-0 z-10 bg-gradient-to-r from-[#0f172a] via-[#0f172a]/80 to-transparent lg:from-[#0f172a]/95 lg:via-[#0f172a]/70 lg:to-transparent" />
       </div>
 
       {/* --- CONTENT AREA --- */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 w-full">
+      <div className="relative z-20 max-w-7xl mx-auto px-6 lg:px-12 w-full">
         <div className="grid lg:grid-cols-2 items-center gap-12">
           {/* Left Content */}
           <div
-            className={`space-y-8 transition-all duration-1000 transform text-left
-              ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"}
+            className={`space-y-6 sm:space-y-8 transition-all duration-1000 transform text-left
+              ${isVisible ? "opacity-100 translate-y-0 lg:translate-x-0" : "opacity-0 translate-y-10 lg:-translate-x-10"}
               xl:-ml-[20px]
             `}
           >
             {/* Badge */}
             <div className="
               inline-flex items-center gap-2 px-4 py-2 
-              bg-orange-500/10 border border-orange-500/30 rounded-full text-orange-400
+              bg-orange-500/20 border border-orange-500/40 rounded-full text-orange-400
               tracking-widest uppercase shadow-sm backdrop-blur-md
-              text-[13px] sm:text-[14px] font-semibold
-              mb-6 sm:mb-8 md:mb-10
+              text-[11px] sm:text-[13px] lg:text-[14px] font-bold
+              mb-2 lg:mb-10
             ">
-              <Sparkles className="w-4 h-4 shrink-0" />
+              <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
               <span className="whitespace-nowrap">Empowering Innovation</span>
             </div>
 
             {/* Heading */}
             <h1
               className="
-                text-[32px] sm:text-[40px] md:text-[48px] lg:text-[56px] xl:text-[64px]
-                font-bold text-white leading-[1.2] tracking-tight
+                text-[30px] sm:text-[42px] md:text-[52px] lg:text-[56px] xl:text-[64px]
+                font-bold text-white leading-[1.1] tracking-tight
               "
             >
               Future-Ready <br />
-              <span className="text-orange-500 drop-shadow-sm">
+              <span className="text-orange-500 drop-shadow-2xl">
                 IT Consulting
               </span>
             </h1>
@@ -235,9 +343,9 @@ export default function PremiumHero() {
             {/* Paragraph */}
             <p
               className="
-                text-[15px] sm:text-[16px] md:text-[18px] lg:text-[19px] xl:text-[20px]
-                text-slate-200 max-w-xl leading-relaxed
-                font-medium drop-shadow-md
+                text-[15px] sm:text-[17px] lg:text-[19px] xl:text-[20px]
+                text-slate-100 lg:text-slate-200 max-w-xl leading-relaxed
+                font-medium drop-shadow-lg
               "
             >
               ITrika Inc. helps organizations navigate the digital landscape with
@@ -248,20 +356,20 @@ export default function PremiumHero() {
             </p>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row items-start gap-6 pt-6">
-              <button className="px-8 py-4 bg-orange-500 hover:bg-orange-600 text-white text-[16px] font-bold rounded-full shadow-lg shadow-orange-500/30 transition-all duration-300 flex items-center gap-3 group">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-start gap-4 sm:gap-6 pt-4 lg:pt-6">
+              <button className="px-8 py-4 bg-orange-500 hover:bg-orange-600 text-white text-[15px] sm:text-[16px] font-bold rounded-full shadow-lg shadow-orange-500/40 transition-all duration-300 flex items-center justify-center gap-3 group">
                 Work With Us
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
 
-              <button className="px-8 py-4 bg-white/5 border-2 border-white/20 hover:border-blue-500 text-white text-[16px] font-bold rounded-full hover:bg-white/10 transition-all duration-300 backdrop-blur-sm">
+              <button className="px-8 py-4 bg-white/10 border-2 border-white/30 hover:border-blue-500 text-white text-[15px] sm:text-[16px] font-bold rounded-full hover:bg-white/20 transition-all duration-300 backdrop-blur-md text-center">
                 Our Services
               </button>
             </div>
 
             {/* Trust Indicator */}
-            <div className="pt-10 border-t border-white/10 inline-block">
-              <p className="text-[12px] font-bold text-slate-400 uppercase tracking-[0.25em]">
+            <div className="pt-8 border-t border-white/10 inline-block">
+              <p className="text-[10px] sm:text-[12px] font-bold text-slate-300 lg:text-slate-400 uppercase tracking-[0.2em] sm:tracking-[0.25em]">
                 Trusted by industry leaders worldwide
               </p>
             </div>
@@ -272,8 +380,9 @@ export default function PremiumHero() {
         </div>
       </div>
 
-      {/* Glow Effect */}
-      <div className="absolute bottom-0 left-0 w-full lg:w-1/2 h-64 bg-gradient-to-tr from-blue-600/10 to-transparent z-0 pointer-events-none" />
+      {/* Decorative Glow - Adjusted for Mobile Visibility */}
+      <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-[#0f172a] via-transparent to-transparent z-10 lg:hidden pointer-events-none" />
+      <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600/10 rounded-full blur-[120px] z-0 pointer-events-none" />
     </section>
   );
 }

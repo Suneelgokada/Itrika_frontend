@@ -30,7 +30,7 @@ import { servicesData } from "./servicesData";
 
 const Services = () => {
   return (
-    <section className="bg-gray-50">
+    <section className="bg-gray-50" id="services">
       <ServicesHeader />
 
       <div className="max-w-6xl mx-auto px-6 -mt-20 pb-24">

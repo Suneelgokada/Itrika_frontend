@@ -291,7 +291,7 @@ const handleSubmit = async (e) => {
       name: formData.name,
       email: formData.email,
       phone: formData.phone,
-      toMail: "suneelgokada1227@gmail.com",
+      toMail: "hire@itrika-inc.com",
       toName: "Itrika Admin",
       subject: `New Contact Inquiry from ${formData.name}`,
       message: `

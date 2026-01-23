@@ -148,7 +148,7 @@ export default function PremiumFooter() {
   {/* Right: Designed & Developed + Scroll Button */}
   <div className="flex items-center gap-4 order-3 md:order-3">
     <a
-      href="https://yourwebsite.com"
+      href="https://codingroots.in/"
       target="_blank"
       rel="noopener noreferrer"
       className="text-gray-500 text-sm hover:text-orange-500 transition-colors duration-300"

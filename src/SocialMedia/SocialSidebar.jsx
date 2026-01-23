@@ -1,6 +1,5 @@
 import {
   FaFacebookF,
-  FaInstagram,
   FaLinkedinIn,
   FaTwitter,
 } from "react-icons/fa";
@@ -16,16 +15,12 @@ const SocialSidebar = () => {
         z-50
         flex
         flex-col
-        gap-1
+        gap-2
         p-2
-        bg-white/80
-        backdrop-blur-md
-        shadow-2xl
-        rounded-l-2xl
-        border-l border-y border-slate-200
+        /* Background remove chesi pure transparency ichanu */
+        bg-transparent 
       "
     >
-      {/* Social Link Component to keep it DRY */}
       <SocialIcon 
         href="https://facebook.com" 
         icon={<FaFacebookF />} 
@@ -44,17 +39,10 @@ const SocialSidebar = () => {
         label="Twitter" 
         hoverColor="hover:text-[#1DA1F2]" 
       />
-      <SocialIcon 
-        href="https://instagram.com" 
-        icon={<FaInstagram />} 
-        label="Instagram" 
-        hoverColor="hover:text-pink-600" 
-      />
     </div>
   );
 };
 
-// Reusable Icon Component for cleaner code
 const SocialIcon = ({ href, icon, label, hoverColor }) => (
   <a
     href={href}
@@ -63,19 +51,36 @@ const SocialIcon = ({ href, icon, label, hoverColor }) => (
     className={`
       group w-10 h-10 sm:w-11 sm:h-11 
       flex items-center justify-center 
-      bg-transparent text-slate-600 
+      
+      /* --- IKADA CHANGE CHESANU --- */
+      /* Mobile lo (Hero dark background paina) bright white background */
+      bg-white 
+      /* Larger screens lo subtle glass effect background */
+      sm:bg-white/10 sm:backdrop-blur-sm
+      
+      /* Mobile lo dark blue text (Itrika logo blue) icons ki highlight avvadaniki */
+      text-[#085482] 
+      /* Desktop lo normal text color */
+      sm:text-slate-700
+      
+      /* Desktop hover states */
+      sm:hover:bg-white 
       ${hoverColor} 
-      hover:bg-slate-50
-      rounded-xl
+      /* ---------------------------- */
+
+      rounded-full
+      border border-slate-200/50
+      shadow-xl
       transition-all duration-300 
       relative
+      mb-2
     `}
   >
     <span className="text-lg sm:text-xl transition-transform duration-300 group-hover:scale-110">
       {icon}
     </span>
     
-    {/* Tooltip */}
+    {/* Tooltip text color update chesa for clarity */}
     <span className="
       absolute right-full mr-4 
       opacity-0 group-hover:opacity-100 
