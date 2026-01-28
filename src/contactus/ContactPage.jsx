@@ -559,7 +559,7 @@ const getInputStyle = (name) =>
     </div>
     <div className="flex flex-col">
       <span className="text-[10px] uppercase tracking-widest text-blue-200 font-semibold group-hover:text-orange-200 transition-colors">Call Us</span>
-      <p className="text-sm md:text-base font-bold tracking-wide">+1 (555) 012 3456</p>
+      <p className="text-sm md:text-base font-bold tracking-wide">847.701.5578</p>
     </div>
   </div>
 
@@ -571,7 +571,7 @@ const getInputStyle = (name) =>
     <div className="flex flex-col">
       <span className="text-[10px] uppercase tracking-widest text-blue-200 font-semibold group-hover:text-orange-200 transition-colors">Email Us</span>
       <p className="text-sm md:text-base font-medium group-hover:text-white transition-colors">
-        support@itrikainc.com
+       info@itrika-inc.com
       </p>
     </div>
   </div>
