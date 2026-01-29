@@ -127,7 +127,7 @@ export const jobs = [
     id: "dotnet-opt",
     title: ".NET Developer (F-1 OPT Eligible)",
     category: "OPT",
-    location: "Chicago, IL",
+    location: "Chicago, Remote",
     summary: "Develop and maintain applications using C#, ASP.NET, and .NET technologies in a role aligned with academic coursework.",
     responsibilities: [
       "Develop and maintain applications using C#, ASP.NET, and .NET technologies",
@@ -148,7 +148,7 @@ export const jobs = [
     id: "java-opt",
     title: "Java Developer (F-1 OPT Eligible)",
     category: "OPT",
-    location: "Chicago, IL",
+    location: "Chicago, Remote",
     summary: "Gain hands-on experience in Java development and enterprise-level applications.",
     responsibilities: [
       "Develop Java-based applications using Spring/Spring Boot",
@@ -169,7 +169,7 @@ export const jobs = [
     id: "python-opt",
     title: "Python Developer (F-1 OPT Eligible)",
     category: "OPT",
-    location: "Chicago, IL",
+    location: "Chicago, Remote",
     summary: "Supports academic learning in programming, automation, and backend development.",
     responsibilities: [
       "Develop Python scripts and backend applications",
@@ -190,7 +190,7 @@ export const jobs = [
     id: "ai-ml-opt",
     title: "AI / Machine Learning Engineer (F-1 OPT Eligible)",
     category: "OPT",
-    location: "Chicago, IL",
+    location: "Chicago, Remote",
     summary: "Aligns with academic coursework in artificial intelligence and machine learning.",
     responsibilities: [
       "Assist in building and training machine learning models",
@@ -211,7 +211,7 @@ export const jobs = [
     id: "data-scientist-opt",
     title: "Data Scientist (F-1 OPT Eligible)",
     category: "OPT",
-    location: "Chicago, IL",
+    location: "Chicago, Remote",
     summary: "Apply analytical and statistical techniques to real-world datasets.",
     responsibilities: [
       "Analyze structured and unstructured data",
@@ -232,7 +232,7 @@ export const jobs = [
     id: "data-analyst-opt",
     title: "Data Analyst (F-1 OPT Eligible)",
     category: "OPT",
-    location: "Chicago, IL",
+    location: "Chicago, Remote",
     summary: "Support data-driven business decisions through clean analysis and reporting.",
     responsibilities: [
       "Collect, clean, and analyze datasets",
@@ -253,7 +253,7 @@ export const jobs = [
     id: "data-engineer-opt",
     title: "Data Engineer (F-1 OPT Eligible)",
     category: "OPT",
-    location: "Chicago, IL",
+    location: "Chicago, Remote",
     summary: "Focus on building robust data pipelines and infrastructure.",
     responsibilities: [
       "Build and maintain ETL pipelines",
@@ -274,7 +274,7 @@ export const jobs = [
     id: "sap-opt",
     title: "SAP Consultant (F-1 OPT Eligible)",
     category: "OPT",
-    location: "Chicago, IL",
+    location: "Chicago, Remote",
     summary: "Support enterprise resource planning systems through configuration and testing.",
     responsibilities: [
       "Assist with SAP module configuration and testing",
@@ -295,7 +295,7 @@ export const jobs = [
     id: "cyber-opt",
     title: "Cyber Security Analyst (F-1 OPT Eligible)",
     category: "OPT",
-    location: "Chicago, IL",
+    location: "Chicago, Remote",
     summary: "Monitor systems and networks for threats in an information security role.",
     responsibilities: [
       "Monitor systems and networks for security threats",
@@ -316,7 +316,7 @@ export const jobs = [
     id: "frontend-opt",
     title: "Front-End Developer (F-1 OPT Eligible)",
     category: "OPT",
-    location: "Chicago, IL",
+    location: "Chicago, Remote",
     summary: "Develop responsive user interfaces and work with modern frameworks.",
     responsibilities: [
       "Develop responsive user interfaces using HTML, CSS, and JavaScript",
@@ -337,7 +337,7 @@ export const jobs = [
     id: "qa-opt",
     title: "QA / Software Tester (F-1 OPT Eligible)",
     category: "OPT",
-    location: "Chicago, IL",
+    location: "Chicago, Remote",
     summary: "Create and execute test cases to ensure software quality.",
     responsibilities: [
       "Create and execute test cases and test scenarios",
@@ -358,7 +358,7 @@ export const jobs = [
     id: "devops-opt",
     title: "DevOps Engineer (F-1 OPT Eligible)",
     category: "OPT",
-    location: "Chicago, IL",
+    location: "Chicago, Remote",
     summary: "Support cloud computing, automation, and CI/CD processes.",
     responsibilities: [
       "Assist in CI/CD pipeline setup and maintenance",
@@ -379,7 +379,7 @@ export const jobs = [
     id: "cloud-opt",
     title: "Cloud Engineer (F-1 OPT Eligible)",
     category: "OPT",
-    location: "Chicago, IL",
+    location: "Chicago, Remote",
     summary: "Assist in deploying and managing resources across AWS, Azure, or GCP.",
     responsibilities: [
       "Assist in deploying and managing cloud resources",
@@ -400,7 +400,7 @@ export const jobs = [
     id: "uiux-opt",
     title: "UI/UX Designer (F-1 OPT Eligible)",
     category: "OPT",
-    location: "Chicago, IL",
+    location: "Chicago, Remote",
     summary: "Design wireframes and prototypes for modern digital products.",
     responsibilities: [
       "Design wireframes, mockups, and prototypes",
@@ -423,7 +423,7 @@ export const jobs = [
     id: "dotnet-stem",
     title: ".NET Developer (F-1 STEM OPT Eligible)",
     category: "STEM OPT",
-    location: "Chicago, IL",
+    location: "Chicago, Remote",
     summary: "Advanced training in C# and .NET Core with guided learning objectives.",
     responsibilities: [
       "Develop and enhance applications using C#, ASP.NET, and .NET Core",
@@ -444,7 +444,7 @@ export const jobs = [
     id: "java-stem",
     title: "Java Developer (F-1 STEM OPT Eligible)",
     category: "STEM OPT",
-    location: "Chicago, IL",
+    location: "Chicago, Remote",
     summary: "Structured, hands-on training for Java Developers in a supervised environment.",
     responsibilities: [
       "Develop Java applications using Spring/Spring Boot",
@@ -465,7 +465,7 @@ export const jobs = [
     id: "data-scientist-stem",
     title: "Data Scientist (F-1 STEM OPT Eligible)",
     category: "STEM OPT",
-    location: "Chicago, IL",
+    location: "Chicago, Remote",
     summary: "Apply advanced analytics and statistical techniques with evaluation milestones.",
     responsibilities: [
       "Analyze large datasets to generate insights",
