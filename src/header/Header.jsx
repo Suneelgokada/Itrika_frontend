@@ -74,11 +74,12 @@ export default function PremiumHeader({ onContactClick }) {
             <img
               src="/logo1.png"
               alt="Logo"
+
               className={`
                 /* Mobile: 130px | Tablet: 160px | Large Screen: 192px (w-48) */
                 w-32 sm:w-40 lg:w-48
                 h-auto object-contain
-                transition-all duration-300 group-hover:scale-105
+                transition-all duration-300 group-hover:scale-105 cursor-pointer
                 ${isScrolled ? "brightness-125 contrast-125" : "brightness-110"}
               `}
             />

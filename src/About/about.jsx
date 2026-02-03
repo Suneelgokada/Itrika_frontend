@@ -34,10 +34,12 @@ export default function AboutUs() {
   </div>
 
   {/* Floating Experience Card */}
-  <div className="absolute bottom-4 right-4 hidden sm:block bg-blue-600 p-4 md:p-6 rounded-xl shadow-2xl text-white">
-    <p className="text-2xl md:text-3xl font-bold">10+</p>
-    <p className="text-[10px] md:text-xs uppercase tracking-widest font-semibold opacity-90">Years Experience</p>
-  </div>
+<div className="absolute bottom-4 right-4 hidden sm:block bg-blue-600 p-4 md:p-6 rounded-xl shadow-2xl text-white">
+  <p className="text-lg md:text-xl font-bold">Years of Proven Experience</p>
+  <p className="text-[10px] md:text-xs uppercase tracking-widest font-semibold opacity-90">
+    Delivering Reliable IT Services
+  </p>
+</div>
 </div>
 
 
