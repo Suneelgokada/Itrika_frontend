@@ -1,5 +1,5 @@
 import React from 'react';
-import { CheckCircle2, ArrowRight} from 'lucide-react';
+import { CheckCircle2, ArrowRight } from 'lucide-react';
 
 export default function AboutUs() {
   // Provided content nundi 5 key points
@@ -16,31 +16,31 @@ export default function AboutUs() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
         {/* Grid: Mobile lo single column, LG screens nundi two columns */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center">
-          
+
           {/* --- IMAGE SECTION --- */}
           {/* order-2 lg:order-1: Mobile lo text tharvatha image vasthundi, Desktop lo left side untundi */}
           {/* --- IMAGE SECTION --- */}
-<div className="relative group order-2 lg:order-1 w-full">
-  {/* Background Decorative Glow */}
-  <div className="absolute -inset-4 bg-blue-500/5 rounded-full blur-3xl group-hover:bg-orange-500/10 transition-all duration-700"></div>
-  
-  <div className="relative overflow-hidden rounded-2xl shadow-lg">
-    <img 
-      src="/aboutimage.png"
-      // src="/about.png"
-      alt="Itrika Team Collaboration" 
-      className="w-full h-[300px] sm:h-[400px] md:h-[450px] lg:h-[500px] object-cover transform transition-transform duration-700 group-hover:scale-105"
-    />
-  </div>
+          <div className="relative group order-2 lg:order-1 w-full">
+            {/* Background Decorative Glow */}
+            <div className="absolute -inset-4 bg-blue-500/5 rounded-full blur-3xl group-hover:bg-orange-500/10 transition-all duration-700"></div>
 
-  {/* Floating Experience Card */}
-<div className="absolute bottom-4 right-4 hidden sm:block bg-blue-600 p-4 md:p-6 rounded-xl shadow-2xl text-white">
-  <p className="text-lg md:text-xl font-bold">Years of Proven Experience</p>
-  <p className="text-[10px] md:text-xs uppercase tracking-widest font-semibold opacity-90">
-    Delivering Reliable IT Services
-  </p>
-</div>
-</div>
+            <div className="relative overflow-hidden rounded-2xl shadow-lg">
+              <img
+                src="/aboutimage.png"
+                // src="/about.png"
+                alt="Itrika Team Collaboration"
+                className="w-full h-[300px] sm:h-[400px] md:h-[450px] lg:h-[500px] object-cover transform transition-transform duration-700 group-hover:scale-105"
+              />
+            </div>
+
+            {/* Floating Experience Card */}
+            <div className="absolute bottom-4 right-4 hidden sm:block bg-blue-600 p-4 md:p-6 rounded-xl shadow-2xl text-white">
+              <p className="text-lg md:text-xl font-bold">Years of Proven Experience</p>
+              <p className="text-[10px] md:text-xs uppercase tracking-widest font-semibold opacity-90">
+                Delivering Reliable IT Services
+              </p>
+            </div>
+          </div>
 
 
           {/* --- CONTENT SECTION --- */}
@@ -50,13 +50,13 @@ export default function AboutUs() {
               <div className="inline-flex items-center gap-2 px-3 py-1.5 md:px-4 bg-blue-50 border-l-4 border-blue-600 text-blue-700 text-[10px] md:text-[11px] font-bold uppercase tracking-[0.2em]">
                 Why Choose Us
               </div>
-              
+
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-slate-900 leading-[1.2] tracking-tight">
-                WE ARE <span className="text-blue-600">ITRIKA INC</span>
+                WE ARE <span className="text-blue-600">ITRIKA INC.</span>
               </h2>
-              
+
               <div className="w-20 md:w-24 h-1.5 bg-gradient-to-r from-blue-600 to-orange-500 rounded-full"></div>
-              
+
               <p className="text-base md:text-lg text-slate-600 leading-relaxed font-normal">
                 At Itrika Inc., we are not just service providers; we are partners in your success, dedicated to driving innovation and growth through bespoke technology solutions.
               </p>
@@ -76,7 +76,7 @@ export default function AboutUs() {
               ))}
             </ul>
 
-        {/* Responsive CTA Button */}
+            {/* Responsive CTA Button */}
             <div className="pt-6 md:pt-8">
               <button
                 className="
