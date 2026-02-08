@@ -32,14 +32,6 @@ export default function AboutUs() {
                 className="w-full h-[300px] sm:h-[400px] md:h-[450px] lg:h-[500px] object-cover transform transition-transform duration-700 group-hover:scale-105"
               />
             </div>
-
-            {/* Floating Experience Card */}
-            <div className="absolute bottom-4 right-4 hidden sm:block bg-blue-600 p-4 md:p-6 rounded-xl shadow-2xl text-white">
-              <p className="text-lg md:text-xl font-bold">Years of Proven Experience</p>
-              <p className="text-[10px] md:text-xs uppercase tracking-widest font-semibold opacity-90">
-                Delivering Reliable IT Services
-              </p>
-            </div>
           </div>
 
 
