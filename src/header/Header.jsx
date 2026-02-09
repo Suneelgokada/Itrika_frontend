@@ -61,55 +61,59 @@ export default function PremiumHeader({ onContactClick }) {
     {/* Navbar inner */}
     <div className="flex items-center justify-between h-16">
 
-      {/* ================= LOGO SECTION ================= */}
-      <div
-        className="relative flex items-center gap-1 cursor-pointer -ml-1"
-        onClick={() => navigate("/")}
-      >
-        {/* Logo */}
-        <img
-          src="/itrikalogo.png"
-          alt="Itrika Logo"
-          className={`
-            w-32 sm:w-40 lg:w-48
-            h-20 sm:h-14 lg:h-24
-            object-contain
-            transition-all duration-300 hover:scale-105
-            ${isScrolled ? "brightness-125 contrast-125" : "brightness-110"}
-          `}
-        />
+<div
+  className="relative flex items-center gap-0 cursor-pointer -ml-1"
+  onClick={() => navigate("/")}
+>
+  {/* Logo */}
+  <img
+    src="/itrikalogo.png"
+    alt="Itrika Logo"
+    className={`
+      w-20 h-10              /* MOBILE ONLY */
+      sm:w-28 sm:h-12
+      md:w-34 md:h-14
+      lg:w-38 lg:h-16
+      object-contain
+      transition-all duration-300 hover:scale-105
+      ${isScrolled ? "brightness-125 contrast-125" : "brightness-110"}
+    `}
+  />
 
-        {/* Company Name */}
-        <span
-          className={`
-            text-[#51B9FF]
-            font-medium
+  {/* Company Name */}
+<span
+  className={`
+    text-[#51B9FF]
+    font-medium
 
-            /* font size */
-            text-[34px] sm:text-[40px] lg:text-[48px]
+    /* MOBILE ONLY FIX */
+    text-[22px] h-[46px]
+    -ml-[18px]        /* ← CRITICAL FIX */
 
-            /* height increased */
-            h-[101px] sm:h-[75px] lg:h-[101px]
+    sm:text-[28px] sm:h-[55px] sm:-ml-4
+    md:text-[34px] md:h-[65px] md:-ml-5
+    lg:text-[38px] lg:h-[75px] lg:-ml-6
 
-            leading-[1.05]
-            tracking-tight
+    leading-[1.05]
+    tracking-tight
+    flex items-center
 
-            flex items-center
+    transition-all duration-300
+  `}
+>
+  ITRIKA
+</span>
 
-            /* closer to logo */
-            -ml-7 sm:-ml-5 md:-ml-14 lg:-ml-14
 
-            transition-all duration-300
-          `}
-        >
-          ITRIKA
-        </span>
+  {/* Glow effect */}
+  {isScrolled && (
+    <div className="absolute -inset-3 bg-blue-500/10 blur-2xl rounded-full animate-pulse -z-10" />
+  )}
+</div>
 
-        {/* Glow effect */}
-        {isScrolled && (
-          <div className="absolute -inset-3 bg-blue-500/10 blur-2xl rounded-full animate-pulse -z-10" />
-        )}
-      </div>
+
+
+
 
       {/* ================= DESKTOP NAV ================= */}
       <nav className="hidden lg:flex items-center gap-8">
